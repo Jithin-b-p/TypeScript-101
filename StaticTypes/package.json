@@ -1,0 +1,16 @@
+{
+  "name": "statictypes",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "tsc-watch --onsuccess \"node dist/index.js\""
+  },
+  "keywords": [],
+  "author": "Jithin B P",
+  "license": "ISC",
+  "devDependencies": {
+    "tsc-watch": "^6.0.4",
+    "typescript": "^5.4.3"
+  }
+}
