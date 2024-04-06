@@ -131,3 +131,43 @@ Now a division between two types happen (taxAmount / 2). ([taAamount-string][2-n
 
 But in **TS automatic type coersion is restricted** so this gives error❌.
 ![](./images/error2.png)
+
+## any type
+
+While preserving JavaScript's flexibility, TypeScript offers the any type for scenarios where stricter type checking is undesirable, allowing any data type to be assigned to variables, function parameters, or return values.
+
+we can refactor the about example with any:
+
+```
+const calculateTax = (amount: any): any => {
+return (amount \* 1.2).toFixed(2);
+}
+```
+
+These annotations tell the compiler that the amount parameter can accept any value
+and that the function’s result may be of any type. The use of the any type stops the
+compiler from reporting the error produced. **We are responsible for ensuring that your code doesn’t
+misuse types.**
+
+### Implicit any
+
+The TypeScript compiler will use any when it is assigning types implicitly and cannot
+identify a more specific type to use.
+It is good practice to disable the implicit use of any by setting the compiler’s
+noImplicityAny setting:
+
+```
+{
+ "compilerOptions": {
+ "target": "ES2022",
+ "outDir": "./dist",
+ "rootDir": "./src",
+ "declaration": true,
+ "noImplicitAny": true
+ }
+}
+
+```
+
+**The compiler will display this warning when it cannot infer a more specific type,
+although this doesn’t prevent the explicit use of any.** 👈🏼
