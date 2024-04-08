@@ -18,4 +18,5 @@ TypeScript builds on top of JavaScript, empowering you to write safer, more pred
   - [Type annotation](./StaticTypes/README.md/#type-annotation)
   - [Type inference](./StaticTypes/README.md/#type-inference)
   - [Any type](./StaticTypes/README.md/#any-type)
-  - [implicit any](./StaticTypes/README.md/#implicit-any)
+  - [Implicit any](./StaticTypes/README.md/#implicit-any)
+  - [Type union](./StaticTypes/README.md/#type-union)

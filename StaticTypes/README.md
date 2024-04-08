@@ -171,3 +171,39 @@ noImplicityAny setting:
 
 **The compiler will display this warning when it cannot infer a more specific type,
 although this doesn’t prevent the explicit use of any.** 👈🏼
+
+## Type union
+
+TypeScript offers a spectrum of type safety. any allows any data type, providing maximum flexibility. On the other hand, type annotations for a single type strictly limit values. Finding a middle ground are type unions, which **define a set of allowed types**.
+
+![](./images/type%20union.png)
+
+```
+function calculateTax(amount: number, format: boolean): string | number {
+ const calcAmount = amount * 1.2;
+ return format ? `$${calcAmount.toFixed(2)}` : calcAmount;
+}
+let taxNumber = calculateTax(100, false);
+let taxString = calculateTax(100, true);
+
+```
+
+The type returned by the calculateTax function is the union of the string and number types. It doesn't have a single, clear output type. Instead, it can return either a string or a number. The function can only use features that both strings and numbers have in common (intersection), which in most cases is very limited.
+
+You can see in below image that only toString() is common to both. So string | number type will get only this method to use.
+
+![](./images/effectoftypeunion.png)
+
+Look at the below code to get more clarity !!
+
+```
+let taxNumber: string | number = calculateTax(100, false);
+let taxString: string | number = calculateTax(100, true);
+console.log(`Number Value: ${taxNumber.toFixed(2)}`);
+console.log(`String Value: ${taxString.charAt(0)}`);
+
+```
+
+The about code on calculateTax function cause error ❌
+
+![](./images/typeunion%20error.png)
