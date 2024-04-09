@@ -132,7 +132,7 @@ Now a division between two types happen (taxAmount / 2). ([taAamount-string][2-n
 But in **TS automatic type coersion is restricted** so this gives error❌.
 ![](./images/error2.png)
 
-## any type
+## 'any' type
 
 While preserving JavaScript's flexibility, TypeScript offers the any type for scenarios where stricter type checking is undesirable, allowing any data type to be assigned to variables, function parameters, or return values.
 
@@ -207,3 +207,51 @@ console.log(`String Value: ${taxString.charAt(0)}`);
 The about code on calculateTax function cause error ❌
 
 ![](./images/typeunion%20error.png)
+
+## Type assertion
+
+In TypeScript, a type assertion instructs the compiler to treat a value as a specific type. This is useful for type narrowing, which means converting a broader type (like a union) to a more specific one. To perform a type assertion, you use the as keyword followed by the desired target type.
+
+![](./images/asserting.png)
+
+```
+function calculateTax(amount: number, format: boolean): string | number {
+  const calcAmount = amount * 1.2;
+  return format ? `$${calcAmount.toFixed(2)}` : calcAmount;
+}
+
+let taxNumber = calculateTax(100, false) as number;
+let taxString = calculateTax(100, true) as string;
+
+console.log(`Number Value: ${taxNumber.toFixed(2)}`);
+console.log(`String Value: ${taxString.charAt(0)}`);
+
+```
+
+The output of above code expression narrows down taxNumber to a number type and taxString to string type so that we can perform type specific methods on them.
+
+![](./images/typeassertionsucess.png)
+
+**_No type conversion is performed by a type assertion, which only tells
+the compiler what type it should apply to a value for type checking._**
+
+### Asserting to an unexpected type
+
+```
+function calculateTax(amount: number, format: boolean): string | number {
+  const calcAmount = amount * 1.2;
+  return format ? `$${calcAmount.toFixed(2)}` : calcAmount;
+}
+let taxNumber = calculateTax(100, false) as number;
+let taxString = calculateTax(100, true) as string;
+let taxBoolean = calculateTax(100, false) as boolean;
+
+console.log(`Number Value: ${taxNumber.toFixed(2)}`);
+console.log(`String Value: ${taxString.charAt(0)}`);
+console.log(`Boolean Value: ${taxBoolean}`);
+
+```
+
+In the above code we are type asserting to a non-sepecified type of boolean. This code cause error.❌
+
+![](./images/errortypeassertion2.png)

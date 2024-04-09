@@ -20,3 +20,5 @@ TypeScript builds on top of JavaScript, empowering you to write safer, more pred
   - [Any type](./StaticTypes/README.md/#any-type)
   - [Implicit any](./StaticTypes/README.md/#implicit-any)
   - [Type union](./StaticTypes/README.md/#type-union)
+  - [Type Assertion](./StaticTypes/README.md/#type-assertion)
+  - [Asserting to unexpected type](./StaticTypes/README.md/#asserting-to-an-unexpected-type)
