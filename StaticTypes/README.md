@@ -293,14 +293,14 @@ switch (typeof taxValue) {
 
 ## 'never' Type
 
-TypeScript provides the never type for situations where a type guard has dealt with all of the possible types for a value. In listing 7.27, for example, the switch statement is a type guard for the number and string types, which are the only types that will be returned in the string | number union from the function. Once all the possible types have been handled, the compiler will only allow a value to be assigned to the never type
+TypeScript provides the never type for situations where a type guard has dealt with all of the possible types for a value. Observe in the below example, the switch statement is a type guard for the number and string types, which are the only types that will be returned in the string | number union from the function. Once all the possible types have been handled, the compiler will only allow a value to be assigned to the never type
 
 ```
 function calculateTax(amount: number, format: boolean): string | number {
  const calcAmount = amount * 1.2;
  return format ? `$${calcAmount.toFixed(2)}` : calcAmount;
 }
-166 Chapter 7 Understanding static types
+
 let taxValue = calculateTax(100, false);
 switch (typeof taxValue) {
  case "number":
