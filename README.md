@@ -22,3 +22,5 @@ TypeScript builds on top of JavaScript, empowering you to write safer, more pred
   - [Type union](./StaticTypes/README.md/#type-union)
   - [Type Assertion](./StaticTypes/README.md/#type-assertion)
   - [Asserting to unexpected type](./StaticTypes/README.md/#asserting-to-an-unexpected-type)
+  - [Type guard](./StaticTypes/README.md/#type-guard)
+  - [Never type](./StaticTypes/README.md/#never-type)

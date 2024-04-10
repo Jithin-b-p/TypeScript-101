@@ -1,40 +1,34 @@
 /*
-======================
-type assertion
-======================
-A type assertion tells the TypeScript compiler to treat a value as a specific type, known 
-as type narrowing. A type assertion is one of the ways that you can narrow a type from a 
-union. A type is asserted using the as keyword
+Type guard
 */
 
 function calculateTax(amount: number, format: boolean): string | number {
   const calcAmount = amount * 1.2;
   return format ? `$${calcAmount.toFixed(2)}` : calcAmount;
 }
-let taxNumber = calculateTax(100, false) as number;
-let taxString = calculateTax(100, true) as string;
-console.log(`Number Value: ${taxNumber.toFixed(2)}`);
-console.log(`String Value: ${taxString.charAt(0)}`);
+let taxValue = calculateTax(100, false);
+
+if (typeof taxValue === "number") {
+  console.log(`Number Value: ${taxValue.toFixed(2)}`);
+} else if (typeof taxValue === "string") {
+  console.log(`String Value: ${taxValue.charAt(0)}`);
+}
 
 /*
-In the listing, the as keyword is used to tell the compiler that the value assigned to the 
-taxNumber variable is a number and that the value assigned to the taxString variable 
-is a string important: No type conversion is performed by a type assertion, which only tells 
-the compiler what type it should apply to a value for type checking. 
+The compiler doesn’t implement the typeof keyword, which is part of the JavaScript 
+specification. Instead, the compiler trusts that the statements in the conditional block 
+will be executed at runtime only if the value being tested is of the specified type. This 
+knowledge allows the compiler to treat the value as the type being tested. The TypeScript compiler knows that the statements inside the if code block will be 
+executed only if taxValue is a number and allows the number type’s toFixed method 
+to be used without the need for a type assertion,
 */
+// type guarding with switch statement
 
-// asserting to an unexpected type
-
-function calculateTax(amount: number, format: boolean): string | number {
-  const calcAmount = amount * 1.2;
-  return format ? `$${calcAmount.toFixed(2)}` : calcAmount;
+switch (typeof taxValue) {
+  case "number":
+    console.log(`Number Value: ${taxValue.toFixed(2)}`);
+    break;
+  case "string":
+    console.log(`String Value: ${taxValue.charAt(0)}`);
+    break;
 }
-let taxNumber = calculateTax(100, false) as number;
-let taxString = calculateTax(100, true) as string;
-let taxBoolean = calculateTax(100, false) as boolean;
-console.log(`Number Value: ${taxNumber.toFixed(2)}`);
-console.log(`String Value: ${taxString.charAt(0)}`);
-console.log(`Boolean Value: ${taxBoolean}`);
-
-// This Code return an error/
-// you can force the assertion and override the compiler’s warning by first asserting to any and then to the type you require

@@ -255,3 +255,64 @@ console.log(`Boolean Value: ${taxBoolean}`);
 In the above code we are type asserting to a non-sepecified type of boolean. This code cause error.❌
 
 ![](./images/errortypeassertion2.png)
+
+## Type guard
+
+For primitive values, the typeof keyword can be used to test for a specific type without
+needing a type assertion. So that we can apply type specific methods without any error. Let's look into
+calculateTax function with type guard.
+
+```
+function calculateTax(amount: number, format: boolean): string | number {
+ const calcAmount = amount * 1.2;
+ return format ? `$${calcAmount.toFixed(2)}` : calcAmount;
+}
+let taxValue = calculateTax(100, false);
+if (typeof taxValue === "number") {
+ console.log(`Number Value: ${taxValue.toFixed(2)}`);
+} else if (typeof taxValue === "string") {
+ console.log(`String Value: ${taxValue.charAt(0)}`);
+}
+```
+
+This function will not give us error. The compiler doesn’t implement the typeof keyword, which is part of the JavaScript
+specification. Instead, the compiler trusts that the statements in the conditional block will be executed at runtime only if the value being tested is of the specified type. This knowledge allows the compiler to treat the value as the type being tested. The TypeScript compiler knows that the statements inside the if code block will be executed only if taxValue is a number and allows the number type’s toFixed method to be used without the need for a type assertion.
+
+We can do the if block with switch statement. This will be more readable.
+
+```
+switch (typeof taxValue) {
+  case "number":
+    console.log(`Number Value: ${taxValue.toFixed(2)}`);
+    break;
+  case "string":
+    console.log(`String Value: ${taxValue.charAt(0)}`);
+    break;
+}
+```
+
+## 'never' Type
+
+TypeScript provides the never type for situations where a type guard has dealt with all of the possible types for a value. In listing 7.27, for example, the switch statement is a type guard for the number and string types, which are the only types that will be returned in the string | number union from the function. Once all the possible types have been handled, the compiler will only allow a value to be assigned to the never type
+
+```
+function calculateTax(amount: number, format: boolean): string | number {
+ const calcAmount = amount * 1.2;
+ return format ? `$${calcAmount.toFixed(2)}` : calcAmount;
+}
+166 Chapter 7 Understanding static types
+let taxValue = calculateTax(100, false);
+switch (typeof taxValue) {
+ case "number":
+ console.log(`Number Value: ${taxValue.toFixed(2)}`);
+ break;
+ case "string":
+ console.log(`String Value: ${taxValue.charAt(0)}`);
+ break;
+ default:
+ let value: never = taxValue;
+ console.log(`Unexpected type for value: ${value}`);
+}
+```
+
+Something has gone wrong if execution reaches the default clause of the switch statement, and TypeScript provides the never type to ensure you can’t accidentally use a value once type guards have been used to exhaustively narrow a value to all of its possible types.
