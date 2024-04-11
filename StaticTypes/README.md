@@ -316,3 +316,61 @@ switch (typeof taxValue) {
 ```
 
 Something has gone wrong if execution reaches the default clause of the switch statement, and TypeScript provides the never type to ensure you can’t accidentally use a value once type guards have been used to exhaustively narrow a value to all of its possible types.
+
+## Unknown type
+
+TypeScript supports the unknown type, which is a safer alternative to any. An unknown value can be assigned only any or itself unless a type assertion or type guard is used
+
+```
+function calculateTax(amount: number, format: boolean): string | number {
+ const calcAmount = amount * 1.2;
+ return format ? `$${calcAmount.toFixed(2)}` : calcAmount;
+}
+let taxValue = calculateTax(100, false);
+switch (typeof taxValue) {
+ case "number":
+ console.log(`Number Value: ${taxValue.toFixed(2)}`);
+ break;
+ case "string":
+ console.log(`String Value: ${taxValue.charAt(0)}`);
+ break;
+ default:
+ let value: never = taxValue;
+ console.log(`Unexpected type for value: ${value}`);
+}
+let newResult: unknown = calculateTax(200, false);
+let myNumber: number = newResult;
+console.log(`Number value: ${myNumber.toFixed(2)}`)
+```
+
+An unknown value can’t be assigned to another type without a type assertion, so the
+compiler produces the following error ❌ when it compiles the code:
+![](./images/unknownerror.png)
+
+Now we can do **type assertion**
+
+```
+function calculateTax(amount: number, format: boolean): string | number {
+ const calcAmount = amount * 1.2;
+ return format ? `$${calcAmount.toFixed(2)}` : calcAmount;
+}
+let taxValue = calculateTax(100, false);
+switch (typeof taxValue) {
+ case "number":
+ console.log(`Number Value: ${taxValue.toFixed(2)}`);
+ break;
+ case "string":
+ console.log(`String Value: ${taxValue.charAt(0)}`);
+ break;
+ default:
+ let value: never = taxValue;
+ console.log(`Unexpected type for value: ${value}`);
+}
+let newResult: unknown = calculateTax(200, false);
+let myNumber: number = newResult as number;
+console.log(`Number value: ${myNumber.toFixed(2)}`)
+```
+
+This is a successful compilation.✅
+
+![](./images/unknownsuccess.png)
