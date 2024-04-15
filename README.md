@@ -24,3 +24,4 @@ TypeScript builds on top of JavaScript, empowering you to write safer, more pred
   - [Asserting to unexpected type](./StaticTypes/README.md/#asserting-to-an-unexpected-type)
   - [Type guard](./StaticTypes/README.md/#type-guard)
   - [Never type](./StaticTypes/README.md/#never-type)
+  - [Nullable types](./StaticTypes/README.md/#nullable-types)

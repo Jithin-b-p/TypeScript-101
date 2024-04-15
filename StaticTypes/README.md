@@ -319,7 +319,7 @@ Something has gone wrong if execution reaches the default clause of the switch s
 
 ## Unknown type
 
-TypeScript supports the unknown type, which is a safer alternative to any. An unknown value can be assigned only any or itself unless a type assertion or type guard is used
+TypeScript supports the unknown type, which is a safer alternative to any. An unknown value can be assigned only any or itself unless a type assertion or type guard is used.
 
 ```
 function calculateTax(amount: number, format: boolean): string | number {
@@ -374,3 +374,65 @@ console.log(`Number value: ${myNumber.toFixed(2)}`)
 This is a successful compilation.✅
 
 ![](./images/unknownsuccess.png)
+
+## nullable types
+
+TypeScript treats null and undefined as legal values for all types. The reason for this is convenience because a lot of existing JavaScript code that may be required for integration into an application uses these values as part of its normal operation, but it does lead to inconsistencies in type checking.
+In addition to type inconsistencies, nullable values can lead to runtime errors that are difficult to detect during development and often encountered
+by users.
+
+### Restricting nullable assignments
+
+The use of null and undefined can be restricted by enabling the strickNullChecks comiler setting.
+
+```
+{
+ "compilerOptions": {
+ "target": "ES2022",
+ "outDir": "./dist",
+ "rootDir": "./src",
+ "declaration": true,
+ "noImplicitAny": true,
+ "strictNullChecks": true
+ }
+}
+```
+
+This will cause error when null or undefined is encountered by compiler.
+
+### Removing null from a union with an assertion
+
+![](./images/nullassertion.png)
+
+```
+function calculateTax(amount: number, format: boolean): string | number | null {
+  if (amount === 0) {
+    return null;
+  }
+  const calcAmount = amount * 1.2;
+  return format ? `$${calcAmount.toFixed(2)}` : calcAmount;
+}
+
+let taxValue: string | number = calculateTax(100, false)!;
+switch (typeof taxValue) {
+ case "number":
+  console.log(`Number Value: ${taxValue.toFixed(2)}`);
+  break;
+ case "string":
+  console.log(`String Value: ${taxValue.charAt(0)}`);
+  break;
+  default:
+    if (taxValue === null) {
+      console.log("Value is null");
+    } else {
+      console.log(typeof taxValue);
+      let value: never = taxValue;
+      console.log(`Unexpected type for value: ${value}`);
+    }
+}
+
+```
+
+A non-null assertion should be used only when you know that a null
+value cannot occur. A runtime error will be caused if you apply the assertion
+and a null value does occur. A safer approach is to use a type guard.
