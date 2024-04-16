@@ -25,3 +25,8 @@ TypeScript builds on top of JavaScript, empowering you to write safer, more pred
   - [Type guard](./StaticTypes/README.md/#type-guard)
   - [Never type](./StaticTypes/README.md/#never-type)
   - [Nullable types](./StaticTypes/README.md/#nullable-types)
+
+- [Using functions](./UsingFunctions/README.md)
+
+  - [Redefining functions](./UsingFunctions/README.md/#redefining-functions)
+  - [Understanding function parameters](./UsingFunctions/README.md/#understanding-function-parameters)
