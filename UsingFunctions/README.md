@@ -49,3 +49,9 @@ console.log(`1 arg: ${taxValue}`);
 ```
 
 **_Optional parameters must be defined after the required parameters. This means that we cannot reverse the order of the amount and discount parameters in the above example_**
+
+## Parameter with default value
+
+If there is a fallback value that should be used for an optional parameter, then it can be
+applied when the parameter is defined.
+![](./images/defaultparameter.png)

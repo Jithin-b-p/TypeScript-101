@@ -30,4 +30,4 @@ TypeScript builds on top of JavaScript, empowering you to write safer, more pred
 
   - [Redefining functions](./UsingFunctions/README.md/#redefining-functions)
   - [Understanding function parameters](./UsingFunctions/README.md/#understanding-function-parameters)
-  - [Optional parameters]()
+  - [Optional parameters](./UsingFunctions/README.md/#optional-parameters)
