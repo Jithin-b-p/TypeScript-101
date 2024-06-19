@@ -54,4 +54,5 @@ console.log(`1 arg: ${taxValue}`);
 
 If there is a fallback value that should be used for an optional parameter, then it can be
 applied when the parameter is defined.
+
 ![](./images/defaultparameter.png)
