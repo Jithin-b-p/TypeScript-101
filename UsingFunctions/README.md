@@ -56,3 +56,8 @@ If there is a fallback value that should be used for an optional parameter, then
 applied when the parameter is defined.
 
 ![](./images/defaultparameter.png)
+
+## Overloading function types
+
+Type unions make it possible to define a range of types for function parameters and
+results, but they don’t allow the relationship between them to be expressed accurately
