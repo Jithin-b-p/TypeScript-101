@@ -20,4 +20,30 @@ const isLegal = (user: UserTypes) => {
   return user.age > 18;
 };
 
-console.log(isLegal({ firstname: "jithin", lastname: "B P", age: 25 }));
+// console.log(isLegal({ firstname: "jithin", lastname: "B P", age: 25 }));
+
+// static types with union
+
+// .defining a type
+type StringOrNumber = string | number;
+
+const printId = (id: StringOrNumber) => {
+  console.log(`Id is ${id}`);
+};
+
+printId("gdydssd");
+printId(323);
+
+// enum
+
+enum StatusCode {
+  Success = 200,
+  NotFound = 404,
+  ServerError = 500,
+}
+
+const send = () => {
+  console.log(StatusCode.Success);
+};
+
+send();
